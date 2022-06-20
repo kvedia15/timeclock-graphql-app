@@ -1,0 +1,13 @@
+Django==3.2.13
+django-cors-headers==3.12.0
+django-graphql-jwt==0.3.4
+djangorestframework==3.13.1
+graphene==2.1.9
+graphene-django==2.15.0
+graphql-core==2.3.2
+graphql-relay==2.0.1
+pandas
+pyJWT == 2.4.0
+gunicorn
+uwsgi
+uvicorn
