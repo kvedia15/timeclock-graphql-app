@@ -35,6 +35,22 @@ $ python3.7 manage.py runserver
 
 Then go to [http://127.0.0.1:8000/graphql to start writing queries and mutations](http://127.0.0.1:8000/graphql)
 
+## Other Useful Django commands
+
+Delete all data from database 
+
+```console
+$ python3.7 manage.py flush
+```
+
+
+Migrate Model Schema to Database
+
+```console
+$ python3.7 manage.py makemigrations
+$ python3.7 manage.py migrate
+```
+
 ### API
 
 Below is a list of all mutations and queries with their respective input and output. Please note that the application needs to be running for the following queries and mutations to work. For more information about how to run the application, please refer
@@ -155,7 +171,7 @@ Return Data
 ```json
 {
     "clockIn": {
-        "clockItem": {"user": {"username": "user"}, "clockIn": "2022-06-20T04:10:16.932004", "clockIn": "2022-06-20T16:10:16.932004"}
+        "clockItem": {"user": {"username": "user"}, "clockIn": "2022-06-20T04:10:16.932004", "clockOut": "2022-06-20T16:10:16.932004"}
     }
 }
 
@@ -165,13 +181,14 @@ Return Data
 
 ```console
 
-            query  {
-            currentClock(token"token") {
-                user{
-                    username
-                }
-                clockOut
-            }
+query  {
+currentClock(token"token") {
+    user{
+        username
+    }
+    clockIn
+
+}
 }
 
 ```
@@ -180,9 +197,34 @@ Return Data
 
 ```json
 {
-    "clockIn": {
-        "clockItem": {"user": {"username": "user"}, "clockIn": "2022-06-20T04:10:16.932004", "clockIn": "2022-06-20T16:10:16.932004"}
+    "currentClock": {
+        "user": {"username": "user"}, "clockOut": "2022-06-20T04:10:16.932004"
     }
 }
 
+```
+
+
+### [AUTHENTICATED] Get Clocked Hours for User
+
+```console
+
+query  {
+clockedHours(token:"token") {
+    today
+    currentWeek
+    currentMonth
+}
+}
+
+```
+
+Return Data
+
+```json
+{
+    "clockedHours": {
+        "today": 1, "currentWeek": 1, "currentMonth": 1
+    }
+}
 ```
